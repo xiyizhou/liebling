@@ -42,6 +42,9 @@
       })(document);
       // @license-end
     </script>
+	<script defer src="{{asset "js/jquery.min.js"}}"></script>
+	<script defer src="{{asset "js/av-min.js"}}"></script>
+	<script defer src="{{asset "js/Valine.min.js"}}"></script>
   </head>
   <body class="{{body_class}}">
     {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
@@ -59,9 +62,6 @@
     <script defer src="{{asset "js/manifest.js"}}"></script>
     <script defer src="{{asset "js/vendor.js"}}"></script>
     <script defer src="{{asset "js/app.js"}}"></script>
-	<script defer src="{{asset "js/jquery.min.js"}}"></script>
-	<script defer src="{{asset "js/av-min.js"}}"></script>
-	<script defer src="{{asset "js/Valine.min.js"}}"></script>
 
     {{!-- The #block helper will pull in data from the #contentFor other template files --}}
     {{{block "scripts"}}}
