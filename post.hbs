@@ -55,9 +55,20 @@ into the {body} of the default.hbs template --}}
                 </div>
               </div>
               {{content}}
+			 <div class="comment"></div>
+            <script>
+				new Valine({
+					av: AV,
+					el: '.comment',
+					app_id: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
+					app_key: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
+					placeholder: '~留言~'
+				});
+			</script>
             </div>
           </div>
         </div>
+		
         {{!-- Email subscribe form at the bottom of the page --}}
         {{#if @labs.subscribers}}
         <section class="m-subscribe-section">
@@ -138,9 +149,9 @@ into the {body} of the default.hbs template --}}
           </div>
         </section>
         {{!-- If you want to embed comments, this is a good place to do it! --}}
-        {{!--
           <section class="m-comments">
-            <div class="m-load-comments">
+		   
+            {{!--<div class="m-load-comments">
               <div class="m-load-comments__line"></div>
               <button class="m-icon-button filled as-load-comments js-tooltip js-load-comments" data-tippy-content="Load comments">
                 <span class="icon-comments"></span>
@@ -155,14 +166,13 @@ into the {body} of the default.hbs template --}}
                 };
                 (function () {
                   var d = document, s = d.createElement('script');
-                  s.src = 'https://CHANGETHIS.disqus.com/embed.js';
+                  s.src = 'https://inotexyz.disqus.com/embed.js';
                   s.setAttribute('data-timestamp', +new Date());
                   (d.head || d.body).appendChild(s);
                 })();
               </script>
-            </div>
+            </div> --}}
           </section>
-          --}}
         {{/post}}
         {{!-- Related posts --}}
         {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors" as |related|}}
