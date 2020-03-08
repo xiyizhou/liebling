@@ -114,4 +114,4 @@ Copyright (c) 2019-2020 Eduardo Gómez. Released under the [MIT license](https:/
 
 ## Credits
 
-All the photo I used in this theme were taken from [Unsplash](https://unsplash.com)
+All the photos I used in this theme were taken from [Unsplash](https://unsplash.com)
