@@ -35,6 +35,11 @@ into the {body} of the default.hbs template --}}
                 <span class="m-heading__meta__divider">&bull;</span>
                 {{/if}}
                 <span class="m-heading__meta__time">{{date published_at}}</span>
+				<span class="m-heading__meta__divider">&bull;</span>
+				<span id="{{url}}" class="leancloud_visitors" data-flag-title="{{title}}">
+					<em class="post-meta-item-text">阅读量 </em>
+					<i class="leancloud-visitors-count">1000000</i>
+				</span>
               </div>
             </header>
             <div class="pos-relative js-post-content">
@@ -62,7 +67,8 @@ into the {body} of the default.hbs template --}}
 					el: '.comment',
 					app_id: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
 					app_key: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
-					placeholder: '~留言~'
+					placeholder: '~留言~',
+					visitor: true
 				});
 			</script>
             </div>
