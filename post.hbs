@@ -63,15 +63,20 @@ into the {body} of the default.hbs template --}}
            
 			
 			<div id="vcomments"></div>
-				<script>
-					new Valine({
-						el: '#vcomments',
-						appId: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
-						appKey: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
-						visitor: true 
-					})
-				</script>
+
 	
+	
+	        <script>
+				new Valine({
+					av: AV,
+					el: '.comment',
+					app_id: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
+					app_key: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
+					placeholder: '~留言~',
+					visitor: true 
+				});
+			</script>
+			
             </div>
           </div>
         </div>
