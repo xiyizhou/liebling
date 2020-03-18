@@ -55,6 +55,16 @@ into the {body} of the default.hbs template --}}
                   </div>
                 </div>
                 {{content}}
+				  <div id="vcomments"></div>
+				<script>
+					new Valine({
+						el: '#vcomments',
+						appId: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
+						appKey: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
+						placeholder: '~留言~',
+						visitor: true 
+					})
+				</script>			
               </div>
             </div>
           </div>
@@ -150,18 +160,6 @@ into the {body} of the default.hbs template --}}
               </div>
             </div>
           </section>
-		  <div id="vcomments"></div>
-				<script>
-					new Valine({
-						el: '#vcomments',
-						appId: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
-						appKey: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
-						placeholder: '~留言~',
-						visitor: true 
-					})
-				</script>			
-            </div>
-          </div>
           {{!-- If you want to embed comments, this is a good place to do it! --}}
           {{!--
           <section class="m-comments">
