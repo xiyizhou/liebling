@@ -11,6 +11,7 @@ import {
   isRTL,
   formatDate,
   isDarkMode,
+  isMobile,
   getParameterByName
 } from './helpers'
 
@@ -30,6 +31,7 @@ $(document).ready(() => {
   const $submenuOption = $('.js-submenu-option')[0]
   const $submenu = $('.js-submenu')
   const $recentArticles = $('.js-recent-articles')
+  const $openSecondaryMenu = $('.js-open-secondary-menu')
   const $openSearch = $('.js-open-search')
   const $closeSearch = $('.js-close-search')
   const $search = $('.js-search')
@@ -42,6 +44,7 @@ $(document).ready(() => {
 
   let fuse = null
   let submenuIsOpen = false
+  let secondaryMenuTippy = null
 
   function showSubmenu() {
     $header.addClass('submenu-is-active')
@@ -249,15 +252,24 @@ $(document).ready(() => {
     }
   }
 
-  var headerElement = document.querySelector('.js-header')
-
-  if (headerElement) {
-    var headroom = new Headroom(headerElement, {
+  if ($header.length > 0) {
+    const headroom = new Headroom($header[0], {
       tolerance: {
         down: 10,
         up: 20
       },
-      offset: 15
+      offset: 15,
+      onUnpin: () => {
+        if (!isMobile() && secondaryMenuTippy) {
+          const desktopSecondaryMenuTippy = secondaryMenuTippy[0]
+
+          if (
+            desktopSecondaryMenuTippy && desktopSecondaryMenuTippy.state.isVisible
+          ) {
+            desktopSecondaryMenuTippy.hide()
+          }
+        }
+      }
     })
     headroom.init()
   }
@@ -292,6 +304,17 @@ $(document).ready(() => {
     }
   })
   observer.observe()
+
+  if ($openSecondaryMenu.length > 0) {
+    const template = document.getElementById('secondary-navigation-template')
+
+    secondaryMenuTippy = tippy('.js-open-secondary-menu', {
+      content: template.innerHTML,
+      arrow: true,
+      trigger: 'click',
+      interactive: true
+    })
+  }
 
   tippy('.js-tooltip')
 
