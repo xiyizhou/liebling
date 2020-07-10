@@ -45,6 +45,10 @@ into the {body} of the default.hbs template --}}
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
                 {{/if}}
                 <span class="m-heading__meta__time">{{date published_at}}</span>
+				  <span class="m-heading__meta__divider">&bull;</span>
+				<span id="{{url}}" class="leancloud_visitors" data-flag-title="{{title}}" >
+                <div class="leancloud-visitors-count">1</div>
+				</span>
               </div>
             </header>
             <div class="pos-relative js-post-content">
@@ -163,7 +167,6 @@ into the {body} of the default.hbs template --}}
           </div>
         </section>
         {{!-- If you want to embed comments, this is a good place to do it! --}}
-        {{!--
           <section class="m-comments">
             <div class="m-load-comments">
               <div class="m-load-comments__line"></div>
@@ -172,22 +175,19 @@ into the {body} of the default.hbs template --}}
               </button>
             </div>
             <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-              <div id="disqus_thread"></div>
-              <script>
-                var disqus_config = function () {
-                  this.page.url = "{{url absolute="true"}}";
-                  this.page.identifier = "ghost-{{comment_id}}"
-                };
-                (function () {
-                  var d = document, s = d.createElement('script');
-                  s.src = 'https://CHANGETHIS.disqus.com/embed.js';
-                  s.setAttribute('data-timestamp', +new Date());
-                  (d.head || d.body).appendChild(s);
-                })();
-              </script>
+              <div id="vcomments"></div>
+				<script>
+					new Valine({
+						el: '#vcomments',
+						appId: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
+						appKey: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
+						placeholder: '~留言~',
+						enableQQ: true,
+						visitor: true 
+					})
+				</script>			
             </div>
           </section>
-        --}}
       {{/post}}
       {{!-- Related posts --}}
       {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors" as |related|}}
