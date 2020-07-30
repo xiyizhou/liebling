@@ -80,20 +80,19 @@ $(document).ready(() => {
     const allPosts = []
     const fuseOptions = {
       shouldSort: true,
-      threshold: 0.6,
-      location: 0,
-      distance: 100,
+      ignoreLocation: true,
       findAllMatches: true,
-      minMatchCharLength: 1,
-      keys: ['title', 'custom_excerpt', 'html']
+      includeScore: true,
+      minMatchCharLength: 2,
+      keys: ['title', 'custom_excerpt']
     }
 
     api.posts.browse({
       limit: 'all',
-      fields: 'id, title, url, published_at, custom_excerpt, html'
+      fields: 'id, title, url, published_at, custom_excerpt'
     })
       .then((posts) => {
-        for (var i = 0, len = posts.length; i < len; i++) {
+        for (let i = 0, len = posts.length; i < len; i++) {
           allPosts.push(posts[i])
         }
 
@@ -186,15 +185,21 @@ $(document).ready(() => {
   $inputSearch.keyup(() => {
     if ($inputSearch.val().length > 0 && fuse) {
       const results = fuse.search($inputSearch.val())
+      const bestResults = results.filter((result) => {
+        if (result.score <= 0.5) {
+          return result
+        }
+      })
+
       let htmlString = ''
 
-      if (results.length > 0) {
-        for (var i = 0, len = results.length; i < len; i++) {
+      if (bestResults.length > 0) {
+        for (let i = 0, len = bestResults.length; i < len; i++) {
           htmlString += `
           <article class="m-result">\
-            <a href="${results[i].item.url}" class="m-result__link">\
-              <h3 class="m-result__title">${results[i].item.title}</h3>\
-              <span class="m-result__date">${formatDate(results[i].item.published_at)}</span>\
+            <a href="${bestResults[i].item.url}" class="m-result__link">\
+              <h3 class="m-result__title">${bestResults[i].item.title}</h3>\
+              <span class="m-result__date">${formatDate(bestResults[i].item.published_at)}</span>\
             </a>\
           </article>`
         }
@@ -234,6 +239,12 @@ $(document).ready(() => {
         submenuIsOpen = false
         hideSubmenu()
       }
+    }
+  })
+
+  $(document).keyup((e) => {
+    if (e.key === 'Escape' && $search.hasClass('opened')) {
+      $closeSearch.click()
     }
   })
 
