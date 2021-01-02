@@ -188,17 +188,14 @@ into the {body} of the default.hbs template --}}
               </button>
             </div>
             <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-              <div id="vcomments"></div>
-				<script>
-					new Valine({
-						el: '#vcomments',
-						appId: 'a1avdg2moWVzKKfrgeIIQp0e-MdYXbMMI',
-						appKey: 'SmWgN3JJ0guh9cBrfiiYp6hJ',
-						placeholder: '~留言~',
-						enableQQ: true,
-						visitor: true 
-					})
-				</script>			
+              <div id="waline"></div>
+                <script>
+                 new Waline({
+                 el: '#waline',
+                 path: location.pathname,
+                 serverURL: 'https://inote-0gos0joxade5c209-1251069384.ap-shanghai.service.tcloudbase.com/
+                 });
+                </script>		
             </div>
           </section>
       {{/post}}
