@@ -180,7 +180,7 @@ into the {body} of the default.hbs template --}}
           </div>
         </section>
         {{!-- If you want to embed comments, this is a good place to do it! --}}
-          <section class="m-comments">
+	  <section class="m-comments">
             <div class="m-load-comments">
               <div class="m-load-comments__line"></div>
               <button class="m-icon-button filled as-load-comments js-tooltip js-load-comments" data-tippy-content="Load comments">
@@ -188,14 +188,14 @@ into the {body} of the default.hbs template --}}
               </button>
             </div>
             <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-              <div id="waline"></div>
-                <script>
-                 new Waline({
-                 el: '#waline',
-                 path: location.pathname,
-                serverURL: 'https://inote-1gsa4sem4f8ef8bf-1251069384.ap-shanghai.service.tcloudbase.com'
-                 });
-                </script>		
+          <div id="waline"></div>
+  <script>
+    new Waline({
+      el: '#waline',
+      path: location.pathname,
+      serverURL: 'https://inote-1gsa4sem4f8ef8bf-1251069384.ap-shanghai.service.tcloudbase.com'
+    });
+  </script>
             </div>
           </section>
       {{/post}}
