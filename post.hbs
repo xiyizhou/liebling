@@ -44,8 +44,13 @@ into the {body} of the default.hbs template --}}
                   <a href="{{primary_tag.url}}" class="m-heading__meta__tag">{{primary_tag.name}}</a>
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
                 {{/if}}
-                <span class="m-heading__meta__time">{{date published_at}}</span>
-              </div>
+                 <span class="m-heading__meta__time">{{date published_at}}</span>
+		  <span class="m-heading__meta__divider">&bull;</span>
+		  <span id="{{url}}" class="leancloud_visitors">
+                    <em class="post-meta-item-text">阅读量 </em>
+                    <i class="leancloud-visitors-count"></i>
+                  </span>
+               </div>
             </header>
             <div class="pos-relative js-post-content">
               <div class="m-share">
