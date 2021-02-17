@@ -44,13 +44,8 @@ into the {body} of the default.hbs template --}}
                   <a href="{{primary_tag.url}}" class="m-heading__meta__tag">{{primary_tag.name}}</a>
                   <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
                 {{/if}}
-                 <span class="m-heading__meta__time">{{date published_at}}</span>
-		  <span class="m-heading__meta__divider">&bull;</span>
-		  <span id="{{url}}" class="leancloud_visitors">
-                    <em class="post-meta-item-text">  </em>
-                    <i class="leancloud-visitors-count"></i>
-                  </span>
-               </div>
+                <span class="m-heading__meta__time">{{date published_at}}</span>
+              </div>
             </header>
             <div class="pos-relative js-post-content">
               <div class="m-share">
@@ -181,33 +176,54 @@ into the {body} of the default.hbs template --}}
           </div>
         </section>
         {{!-- If you want to embed comments, this is a good place to do it! --}}
-	  <section class="m-comments">
-            <div class="m-load-comments">
-              <div class="m-load-comments__line"></div>
-              <button class="m-icon-button filled as-load-comments js-tooltip js-load-comments" data-tippy-content="Load comments">
-                <span class="icon-comments"></span>
-              </button>
-            </div>
+        {{!--
+          <section class="m-comments">
             <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-          <div id="waline"></div>
-           <script>
-            new Waline({
-            el: '#waline',
-            path: location.pathname,
-            visitor: true,
-	    avatar: 'wavatar',
-	    placeholder: '~ 无需注册登录，即可发表评论 ~ ',
-	    langMode: {
-              admin: '博主'
-             },
-            serverURL: 'https://cmt.inote.xyz'
-            });
-          </script>
+              <div id="disqus_thread"></div>
+              <script>
+                var disqus_config = function () {
+                  this.page.url = "{{url absolute="true"}}";
+                  this.page.identifier = "ghost-{{comment_id}}"
+                };
+                (function () {
+                  var d = document, s = d.createElement('script');
+                  s.src = 'https://CHANGETHIS.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+                })();
+              </script>
             </div>
           </section>
+        --}}
       {{/post}}
       {{!-- Related posts --}}
-      {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors" as |related|}}
+      {{#if post.tags.length}}
+        {{#get "posts" limit="3" filter="tags:[{{post.tags}}]+id:-{{post.id}}" include="tags,authors" as |related|}}
+          <section class="m-recommended">
+            <div class="l-wrapper in-recommended">
+              <h3 class="m-section-title in-recommended">{{t "Recommended for you"}}</h3>
+              <div class="m-recommended-articles">
+                <div class="m-recommended-slider glide js-recommended-slider">
+                  <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                      {{!-- The tag below iterates over all the related posts --}}
+                      {{> "loop"}}
+                    </div>
+                  </div>
+                  <div data-glide-el="controls" class="glide__arrows js-controls">
+                    <button data-glide-dir="<" class="m-icon-button filled in-recommended-articles glide-prev" aria-label="{{t "Previous"}}">
+                      <span class="icon-arrow-left" aria-hidden="true"></span>
+                    </button>
+                    <button data-glide-dir=">" class="m-icon-button filled in-recommended-articles glide-next" aria-label="{{t "Next"}}">
+                      <span class="icon-arrow-right" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        {{/get}}
+      {{else}}
         <section class="m-recommended">
           <div class="l-wrapper in-recommended">
             <h3 class="m-section-title in-recommended">{{t "Recommended for you"}}</h3>
@@ -215,23 +231,21 @@ into the {body} of the default.hbs template --}}
               <div class="m-recommended-slider glide js-recommended-slider">
                 <div class="glide__track" data-glide-el="track">
                   <div class="glide__slides">
-                    {{!-- The tag below iterates over all the related posts --}}
-                    {{> "loop"}}
+                    <div class="m-recommended-slider__item glide__slide">
+                      <div class="m-heading no-margin">
+                        <h3>{{t "No posts found"}}</h3>
+                        <p>
+                          {{t "Apparently there are no posts at the moment, check again later."}}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div data-glide-el="controls" class="glide__arrows js-controls">
-                  <button data-glide-dir="<" class="m-icon-button filled in-recommended-articles glide-prev" aria-label="{{t "Previous"}}">
-                    <span class="icon-arrow-left" aria-hidden="true"></span>
-                  </button>
-                  <button data-glide-dir=">" class="m-icon-button filled in-recommended-articles glide-next" aria-label="{{t "Next"}}">
-                    <span class="icon-arrow-right" aria-hidden="true"></span>
-                  </button>
                 </div>
               </div>
             </div>
           </div>
         </section>
-      {{/get}}
+      {{/if}}
     </div>
   </article>
 </main>
